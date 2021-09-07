@@ -1,0 +1,561 @@
+openapi: 3.0.0
+info:
+  title: 'Delilah API'
+  contact: {}
+  version: "1.0.0"
+  description: |
+    Documentacion del API que consume el restaurante Delilah Resto para los servicios de reserva, pedido y delivery.
+    [#DelilahResto #ACAMICA](https://www.acamica.com/desarrollo-web-full-stack).
+  license:
+    name: "Apache 2.0"
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+
+tags:
+  - name: products
+    description: Operaciones acerca de los productos 
+  - name: users
+    description: Operaciones acerca de los usuarios
+  - name: orders
+    description: Operaciones acerca de los pedidos
+paths:
+  /products/all:
+    get:
+      tags:
+      - products
+      summary: obetener todos los productos
+      operationId: ObtenerProductos
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /products/{id}:
+    get:
+      tags:
+      - products
+      summary: obetener productos por numero de id 
+      operationId: ObtenerProductosPorID
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id numerico del producto a buscar
+  /products:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - products
+      summary: AgregarProducto
+      operationId: AgregarProducto
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgregarProductoRequest'
+            example:
+              urlImg: 'http://dummyimage.com/129x100.png/cc0000/ffffff'
+              dishName: Popcorn
+              price: 256789
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'you are not authorized here 😵'
+          headers: {}
+        406:
+          description: 'El producto ya existe'
+          headers: {}
+      deprecated: false
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - products
+      summary: EditarProducto
+      operationId: EditarProducto
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditarProductoRequest'
+            example:
+              id: 30
+              urlImg: 'http://dummyimage.com/129x100.png/cc0000/ffffff'
+              dishName: Popcorn
+              price: 256789
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'you are not authorized here 😵'
+          headers: {}
+        406:
+          description: 'El producto ya existe'
+          headers: {}
+      deprecated: false
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+      - products
+      summary: EliminarProducto
+      operationId: EliminarProducto
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'you are not authorized here 😵'
+          headers: {}
+        406:
+          description: 'El producto ya existe'
+          headers: {}
+      deprecated: false
+
+  
+  /users/allusers:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - users
+      summary: obetener todos los usuario
+      operationId: ObtenerTodosUsuarios
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+      deprecated: false
+  /users/login:
+    post:
+      tags:
+      - users
+      summary: Login
+      operationId: Login
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+            example:
+              login: llaxen0@123-reg.co.uk
+              contrasena: qiNnTU4LO
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'the email or password are not valid'
+          headers: {}
+      deprecated: false
+  /users/register:
+    post:
+      tags:
+      - users
+      summary: register
+      operationId: register
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+            example:
+              userName: TomNook
+              name: Tom
+              lastname: Nook
+              email: tomnook@gmail.com
+              phone: 564123456
+              address: cra 12 no 11-10
+              password: animal123
+              role: user
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'the email or password are not valid'
+          headers: {}
+      deprecated: false
+  /users:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - users
+      summary: modificar informacion de usuario
+      operationId: modificarUsuario
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+            example:
+              userName: TomNook
+              name: Tom
+              lastname: Nook
+              email: tomnook@gmail.com
+              phone: 564123456
+              address: cra 12 no 11-10
+              password: animal123
+              role: user
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'NO se modifico el usuario'
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+      - users
+      summary: eliminarUsuario
+      operationId: eliminarUsuario
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'NO se ELIMINO el usuario'
+
+ 
+  /orders/all:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: obetener todas las ordenes
+      operationId: ObtenerOrdenes
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        400:
+          description: 'you are not authorized here 😵'
+          headers: {}
+        404:
+          description: 'en el momento no hay ordenes'
+          headers: {}
+      deprecated: false
+  /orders/{ordernumber}:
+    get:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: obetener ordenes por numero de id 
+      operationId: ObtenerOrdenesPorID
+      responses:
+        200:
+          description: ''
+          headers: {}
+        404:
+          description: 'en el momento no hay ordenes'
+          headers: {}
+      deprecated: false
+      parameters:
+        - in: path
+          name: ordernumber
+          schema:
+            type: integer
+            format: int32
+          required: true
+          description: Id numerico de la orden a buscar
+  /orders:
+    post:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: AgregarPedido
+      operationId: AgregarPedido
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AgregarPedidoRequest'
+            example:
+              idUser: 2
+              productos:
+                proId: 4
+                amount: 2
+              time: 2021-05-12 18:43:32
+              payment: tarjeta
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        406:
+          description: 'no se creo la orden 😱'
+          headers: {}
+      deprecated: false
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: EditarPedido
+      operationId: EditarPedido
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditarPedidoRequest'
+            example:
+              state: enviado
+              orderId: 12
+              userId: 5
+              productos:
+                proId: 4
+                amount: 2
+              time: 2021-05-12 18:43:32
+              payment: tarjeta
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        406:
+          description: 'no se modifico la orden 🤯'
+          headers: {}
+      deprecated: false
+    delete:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: EliminarOrden
+      operationId: EliminarOrden
+      parameters: []
+      responses:
+        200:
+          description: ''
+          headers: {}
+        404:
+          description: 'no se elimino ninguna orden 😵'
+          headers: {}
+      deprecated: false
+
+
+components:
+  schemas:
+    Register:
+      title: Register
+      required:
+      - userName
+      - name
+      - lastname
+      - email
+      - phone
+      - address
+      - password
+      - role
+      type: object
+      properties:
+        userName:
+          type: string
+        name:
+          type: string
+        lastname:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        address:
+          type: string
+        password:
+          type: string
+        role:
+          type: string
+      example:
+        userName: TomNook
+        name: Tom
+        lastname: Nook
+        email: tomnook@gmail.com
+        phone: 564123456
+        address: cra 12 no 11-10
+        password: animal123
+        role: user
+    LoginRequest:
+      title: LoginRequest
+      required:
+      - email
+      - password
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      example:
+        email: llaxen0@123-reg.co.uk
+        password: qiNnTU4LO
+
+    Producto:
+      title: Producto
+      required:
+      - proId
+      - amount
+      type: object
+      properties:
+        proId:
+          type: integer
+          format: int32
+        amount:
+          type: integer
+          format: int32
+      example:
+        proId: 4
+        amount: 2
+    AgregarPedidoRequest:
+      title: AgregarPedidoRequest
+      required:
+      - idUser
+      - products
+      - time
+      - payment
+      type: object
+      properties:
+        idUser:
+          type: integer
+          format: int32
+        productos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Producto'
+          description: ''
+        time:
+          type: string
+        payment:
+          type: string
+      example:
+        idUser: 2
+        productos:
+          proId: 4
+          amount: 2
+        time: 2021-05-12 18:43:32
+        payment: tarjeta
+    EditarPedidoRequest:
+      title: EditarPedidoRequest
+      required:
+      - state
+      - orderId
+      - userId
+      - products
+      - time
+      - payment
+      type: object
+      properties:
+        state:
+          type: string
+        orderId:
+          type: integer
+          format: int32
+        userId:
+          type: integer
+          format: int32
+        products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Producto'
+          description: ''
+        time:
+          type: string
+        payment:
+          type: string
+      example:
+        state: enviado
+        orderId: 12
+        userId: 5
+        productos:
+          proId: 4
+          amount: 2
+        time: 2021-05-12 18:43:32
+        payment: tarjeta
+
+    AgregarProductoRequest:
+      title: AgregarProductoRequest
+      required:
+      - urlImg
+      - dishName
+      - price
+      type: object
+      properties:
+        urlImg:
+          type: string
+        dishName:
+          type: string
+        price:
+          type: integer
+          format: int32
+      example:
+        urlImg: 'http://dummyimage.com/129x100.png/cc0000/ffffff'
+        dishName: Popcorn
+        price: 256789
+    EditarProductoRequest:
+      title: EditarProductoRequest
+      required:
+      - id
+      - urlImg
+      - dishName
+      - price
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        urlImg:
+          type: string
+        dishName:
+          type: string
+        price:
+          type: integer
+          format: int32
+      example:
+        id: 30
+        urlImg: 'http://dummyimage.com/129x100.png/cc0000/ffffff'
+        dishName: Popcorn
+        price: 256789
+  securitySchemes:
+      bearerAuth:            # arbitrary name for the security scheme
+        type: http
+        scheme: bearer
+        bearerFormat: JWT    #
