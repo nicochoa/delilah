@@ -18,9 +18,9 @@ const {
 router.get('/all', validateUserRole, respondAllOrders);
 router.get('/:ordernumber', respondOrderNumber);
 router.post('/', addingOrder);
-router.put('/', changingOrder);
+router.put('/',validateUserRole, changingOrder);
 router.put('/estado', validateUserRole, changingStatus);
-router.delete('/', deleteOrder);
+router.delete('/',validateUserRole, deleteOrder);
 
 
 module.exports = router;
