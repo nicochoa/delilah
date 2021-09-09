@@ -293,6 +293,34 @@ paths:
             format: int32
           required: true
           description: Id numerico de la orden a buscar
+  /orders/estado:
+    put:
+      security:
+        - bearerAuth: []
+      tags:
+      - orders
+      summary: EditarEstado
+      operationId: EditarEstado
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditarPedidoEstado'
+            example:
+              state: cancelado
+              orderId: 11
+              role: admin
+        required: true
+      responses:
+        200:
+          description: ''
+          headers: {}
+        406:
+          description: 'no se modifico la orden 🤯'
+          headers: {}
+      deprecated: false
   /orders:
     post:
       security:
@@ -510,6 +538,25 @@ components:
           amount: 2
         time: 2021-05-12 18:43:32
         payment: tarjeta
+    EditarPedidoEstado:
+      title: EditarPedidoEstado
+      required:
+      - state
+      - orderId
+      - role
+      type: object
+      properties:
+        state:
+          type: string
+        orderId:
+          type: integer
+          format: int32
+        role:
+          type: string
+      example:
+        state: cancelado
+        orderId: 11
+        role: admin
 
     AgregarProductoRequest:
       title: AgregarProductoRequest
