@@ -250,7 +250,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"urlImg\": \"http://dummyimage.com/129x100.png/cc0000/ffffff\",\n    \"dishName\": \"zanahoria\",\n    \"price\": 700\n}",
+							"raw": "{\n    \"urlImg\": \"http://dummyimage.com/129x100.png/cc0000/ffffff\",\n    \"dishName\": \"zanahoria\",\n    \"price\": 700,\n    \"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -284,7 +284,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 51,\n    \"urlImg\": \"http://dummyimage.com/129x100.png/cc0000/ffffff\",\n    \"dishName\": \"zanahoria\",\n    \"price\": 800\n}",
+							"raw": "{\n    \"id\": 51,\n    \"urlImg\": \"http://dummyimage.com/129x100.png/cc0000/ffffff\",\n    \"dishName\": \"zanahoria\",\n    \"price\": 800,\n    \"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -325,7 +325,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id\": 54\n}",
+							"raw": "{\n    \"id\": 54,\n    \"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -474,7 +474,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"state\":\"enviado\",\n    \"orderId\":\"12\",\n    \"userId\": \"5\",\n    \"products\":[\n        {\"proId\":4, \"amount\":3},\n        {\"proId\":2, \"amount\":1},\n        {\"proId\":3, \"amount\":2}\n        ],\n    \"time\":\"2021-05-12 18:43:32\",\n    \"payment\":\"tarjeta\"\n}",
+							"raw": "{\n    \"state\":\"enviado\",\n    \"orderId\":\"12\",\n    \"userId\": \"5\",\n    \"products\":[\n        {\"proId\":4, \"amount\":3},\n        {\"proId\":2, \"amount\":1},\n        {\"proId\":3, \"amount\":2}\n        ],\n    \"time\":\"2021-05-12 18:43:32\",\n    \"payment\":\"tarjeta\",\n    \"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -515,7 +515,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"orderId\":\"12\"\n}",
+							"raw": "{\n    \"orderId\":\"12\",\n    \"role\": \"admin\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -538,11 +538,8 @@
 				},
 				{
 					"name": "put estado",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
 					"request": {
-						"method": "GET",
+						"method": "PUT",
 						"header": [
 							{
 								"key": "Authorization",
