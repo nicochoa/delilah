@@ -5,6 +5,7 @@ const {
     respondOrderNumber,
     addingOrder,
     changingOrder,
+    changingStatus,
     deleteOrder
 } = require('../controllers/orders');
 
@@ -18,6 +19,7 @@ router.get('/all', validateUserRole, respondAllOrders);
 router.get('/:ordernumber', respondOrderNumber);
 router.post('/', addingOrder);
 router.put('/', changingOrder);
+router.put('/estado', validateUserRole, changingStatus);
 router.delete('/', deleteOrder);
 
 

@@ -4,6 +4,7 @@ const {
     findOrderNumber,
     addingOrder,
     changingOrder,
+    changingStatus,
     deleteOrder
 } = require('../models/orders.js')
 
@@ -56,6 +57,21 @@ module.exports = {
     changingOrder: async(req, res) => {
         //SOLO LAS QUE EL USUARIO CREO
         let results = await changingOrder(req);
+        if (!results || results.length == 0) {
+            res.status(406).send("no se modifico la orden 🤯")
+        } else {
+            response = {
+                error: false,
+                codigo: 200,
+                mensaje: 'se modifico su orden',
+                result: results
+            }
+            res.send(response);
+        }
+    },
+    changingStatus: async(req, res) => {
+        //SOLO LAS QUE EL USUARIO CREO
+        let results = await changingStatus(req);
         if (!results || results.length == 0) {
             res.status(406).send("no se modifico la orden 🤯")
         } else {

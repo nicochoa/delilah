@@ -535,6 +535,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "put estado",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2Mjk0ODg4Njl9.2HfMMZAUsdKVY20gtjmyRZJqfdlFetmKpaBcxZpS2Fo",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"state\":\"enviado\",\n    \"orderId\":\"11\",\n    \"role\": \"admin\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:4000/order/estado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4000",
+							"path": [
+								"order",
+								"estado"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}

@@ -58,13 +58,6 @@ async function addingOrder(req){
     return newOrder;
 }       
 async function changingOrder(req){
-    /*
-    -busacar la order por id 
-    -usar la variable de la orden para buscar los articulos 
-    asociados guardarlos en otra variable como un array de objetos,
-    - eliminarlos de productsPerOrders 
-    - a la variable 
-    */
     let toChange = await sequelize.query(
         'SELECT * FROM `orders` WHERE orders.orderNumber = :orderId',
         {
@@ -114,6 +107,34 @@ async function changingOrder(req){
         return 'no se modifico la orden';
     }
 }
+
+async function changingStatus(req){
+    let toChange = await sequelize.query(
+        'SELECT * FROM `orders` WHERE orders.orderNumber = :orderId',
+        {
+            replacements: { 
+                orderId: req.body.orderId
+            },
+            type:"SELECT"
+        }
+    );
+    if (toChange[0]) {
+        let order = await sequelize.query(
+            'UPDATE `orders` SET `state`= :state WHERE `orderNumber`= :orderId',
+            {
+                replacements: { 
+                    state: req.body.state,
+                    orderId: req.body.orderId
+                },
+                type:"UPDATE"
+            }
+        );
+        return order;
+    } else {
+        return 'no se modifico la orden';
+    }
+}
+
 async function deleteOrder(req){
     let toDelete = await sequelize.query(
         'SELECT * FROM `orders` WHERE orders.orderNumber = :orderNumber',
@@ -150,5 +171,6 @@ module.exports = {
     findOrderNumber,
     addingOrder,
     changingOrder,
+    changingStatus,
     deleteOrder
 }
